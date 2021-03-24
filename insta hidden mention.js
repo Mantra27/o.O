@@ -17,7 +17,7 @@ page.goto(url)
 const t1 = await page.waitForSelector("label [aria-label='Phone number, username, or email']");
 await t1.click();
 const usernameid = await page.$('#loginForm > div > div:nth-child(1) > div > label > input')
-await usernameid.type('mantra_gohill')
+await usernameid.type(username)
 
 //username logger ends...............
 
