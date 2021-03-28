@@ -1,8 +1,13 @@
 const puppeteer = require('puppeteer');
 
-                                  let username = " ";
-                                  let password = " ";
-                                  let usename_of_target =" ";
+
+
+
+                            let username = "";
+                            let password = "";
+                            let username_of_target = "";
+
+
 
 
 
@@ -10,7 +15,7 @@ const puppeteer = require('puppeteer');
 
 let url = "https://www.instagram.com/";
 let launch_options = { headless: false}
-const browser = await puppeteer.launch(launch_options);
+const browser = await puppeteer.launch({headless: false, executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe'});
 const page = await browser.newPage();
 page.setDefaultNavigationTimeout(0);
 page.goto(url)
@@ -37,7 +42,7 @@ await page.waitForSelector("div [class='mt3GC']")
     const nosaveinfo = await page.$("div [class='mt3GC']");
         await nosaveinfo.click();
 
-        page.goto("https://www.instagram.com/"+usename_of_target);
+        page.goto("https://www.instagram.com/"+username_of_target);
         //search username...
 // await page.waitForSelector('span[class="TqC_a"]');
 // const search_bar = await page.$('span[class="TqC_a"]');
@@ -51,99 +56,37 @@ await page.waitForSelector("div [class='mt3GC']")
 //         await viewasthis.click();
 
 
-await page.waitForSelector('div[class="RR-M- h5uC0"]');
-const story_click = await page.waitForSelector('div[class="RR-M- h5uC0"]');
-await story_click.click();
-await page.waitForSelector('div[class="zKGE8 wLYRG"]')
-console.log("1st Mention found !!!")
-const mention = await page.waitForSelector("#react-root > section > div.Igw0E.rBNOH.YBx95.vwCYk > div > section > div > div._-6eR1 > div > div > div > div > div.yxA_V > div:nth-child(1) > div")
-await mention.click();
-let data = await page.evaluate(()=>{
-let user = document.querySelector('div[class="NPpif"]').innerText       
-return{
-user,
-};
-});
-page.goto("https://www.instagram.com/mantra.epic");
-console.log(data);
+let j = 1
+let i =0
+let limit = 20;
+for(i; i<limit; i++){
+ 
+      await page.waitForSelector('div[class="RR-M- h5uC0"]');
+      const story_click = await page.waitForSelector('div[class="RR-M- h5uC0"]');
+      await story_click.click();
+      await page.waitForSelector('div[class="zKGE8 wLYRG"]')
 
-  await page.waitForSelector('div[class="RR-M- h5uC0"]');
-  const story_click2 = await page.waitForSelector('div[class="RR-M- h5uC0"]');
-  await story_click2.click();
-  await page.waitForSelector('div[class="zKGE8 wLYRG"]')
-  console.log("2nd Mention found !!!")
-  const mention2 = await page.waitForSelector("#react-root > section > div.Igw0E.rBNOH.YBx95.vwCYk > div > section > div > div._-6eR1 > div > div > div > div > div.yxA_V > div:nth-child(2) > div")
-  await mention2.click();
-  let data2 = await page.evaluate(()=>{
-  let user2 = document.querySelector('div[class="NPpif"]').innerText       
-  return{
-  user2,
-  };
-  });
-  page.goto("https://www.instagram.com/mantra.epic")
-  console.log(data2);
+    console.log(`${j} Mention found !!!: `)
 
+      const mention = await page.waitForSelector(`div > div > div > div.Igw0E.rBNOH.YBx95._4EzTm.i0EQd.O1flK.D8xaz.TxciK.yiMZG > div > div.yxA_V > div:nth-child(${j}) > div`)
+      await mention.click();
+      let data = await page.evaluate(()=>{
+                
+          let limit = document.querySelectorAll(`div[class="zKGE8 wLYRG"]`).length
+          let user = document.querySelector('div[class="NPpif"]').innerText       
 
-    //Mention 3...................
-    await page.waitForSelector('div[class="RR-M- h5uC0"]');
-    const story_click3 = await page.waitForSelector('div[class="RR-M- h5uC0"]');
-    await story_click3.click();
-    await page.waitForSelector('div[class="zKGE8 wLYRG"]')
-    console.log("3rd Mention found !!!")
-    const mention3 = await page.waitForSelector("#react-root > section > div.Igw0E.rBNOH.YBx95.vwCYk > div > section > div > div._-6eR1 > div > div > div > div > div.yxA_V > div:nth-child(3) > div")
-    await mention3.click();
-    let data3 = await page.evaluate(()=>{
-    let user3 = document.querySelector('div[class="NPpif"]').innerText       
-    return{
-    user3,
-    };
+      return{
+      user,
+      };
+
     });
-    page.goto("https://www.instagram.com/mantra.epic")
-    console.log(data3);
+      page.goto("https://www.instagram.com/"+username_of_target);
+      console.log(data);
+      j++
 
-    //Mention 4........
-    try{
-    await page.waitForSelector('div[class="RR-M- h5uC0"]');
-    const story_click4 = await page.waitForSelector('div[class="RR-M- h5uC0"]');
-    await story_click4.click();
-    await page.waitForSelector('div[class="zKGE8 wLYRG"]')
-    console.log("4rd Mention found !!!")
-    const mention4 = await page.waitForSelector("#react-root > section > div.Igw0E.rBNOH.YBx95.vwCYk > div > section > div > div._-6eR1 > div > div > div > div > div.yxA_V > div:nth-child(4) > div")
-    await mention4.click();
-    let data4 = await page.evaluate(()=>{
-    let user4 = document.querySelector('div[class="NPpif"]').innerText       
-    return{
-    user4,
-    };
-    });
-    page.goto("https://www.instagram.com/mantra.epic")
-    console.log(data4);
-  }
-  catch(exception){
-    
-  }
-
-    //Mention 5.....
-    await page.waitForSelector('div[class="RR-M- h5uC0"]');
-    const story_click5 = await page.waitForSelector('div[class="RR-M- h5uC0"]');
-    await story_click5.click();
-    await page.waitForSelector('div[class="zKGE8 wLYRG"]')
-    console.log("5rd Mention found !!!")
-    const mention5 = await page.waitForSelector("#react-root > section > div.Igw0E.rBNOH.YBx95.vwCYk > div > section > div > div._-6eR1 > div > div > div > div > div.yxA_V > div:nth-child(5) > div")
-    await mention5.click();
-    let data5 = await page.evaluate(()=>{
-    let user5 = document.querySelector('div[class="NPpif"]').innerText       
-    return{
-    user5,
-    };
-    });
-    page.goto("https://www.instagram.com/mantra.epic")
-    console.log(data5);
-
-    
+}
 })();
 
 
          
-
 
