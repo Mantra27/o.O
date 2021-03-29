@@ -47,7 +47,7 @@ await page.waitForSelector("div [class='mt3GC']")
 // await page.waitForSelector('span[class="TqC_a"]');
 // const search_bar = await page.$('span[class="TqC_a"]');
 // await search_bar.click();
-// await search_bar.type("mantra.epic")
+// await search_bar.type(username_of_target)
 // const enterkey = await page.waitForSelector('input[class="XTCLo x3qfX"]')
 // await enterkey.keyboard.press("Enter");
 
